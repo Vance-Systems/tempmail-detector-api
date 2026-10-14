@@ -1,0 +1,54 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "TempMail - Disposable & Burner Email Detection API",
+    "version": "1.0.0",
+    "description": "High-speed detection of disposable, burner, and fake email addresses to protect sign-up funnels."
+  },
+  "servers": [
+    {
+      "url": "https://tempmail-detector-api.onrender.com"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "responses": {
+          "200": {
+            "description": "Service healthy"
+          }
+        }
+      }
+    },
+    "/v1/detect": {
+      "post": {
+        "summary": "Check Email Address for Disposable / Burner Domain",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "test@mailinator.com"
+                  }
+                },
+                "required": [
+                  "email"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email disposable analysis"
+          }
+        }
+      }
+    }
+  }
+}
