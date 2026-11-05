@@ -1,13 +1,14 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "TempMail - Disposable & Burner Email Detection API",
-    "version": "1.0.0",
-    "description": "High-speed detection of disposable, burner, and fake email addresses to protect sign-up funnels."
+    "description": "Real-time detection of 65,000+ disposable, burner, and temporary email domains to stop bot registrations and trial abuse.",
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://tempmail-detector-api.onrender.com"
+      "url": "https://vance-systems.github.io",
+      "description": "Vance Systems Production Gateway"
     }
   ],
   "paths": {
@@ -16,14 +17,24 @@
         "summary": "Health Check",
         "responses": {
           "200": {
-            "description": "Service healthy"
+            "description": "Service Operational"
+          }
+        }
+      }
+    },
+    "/v1/domains/disposable": {
+      "get": {
+        "summary": "List recognized disposable and temporary email domain patterns",
+        "responses": {
+          "200": {
+            "description": "Disposable domain catalog"
           }
         }
       }
     },
     "/v1/detect": {
       "post": {
-        "summary": "Check Email Address for Disposable / Burner Domain",
+        "summary": "Check if an email address belongs to a disposable or throwaway domain",
         "requestBody": {
           "required": true,
           "content": {
@@ -33,19 +44,16 @@
                 "properties": {
                   "email": {
                     "type": "string",
-                    "example": "test@mailinator.com"
+                    "example": "user@mailinator.com"
                   }
-                },
-                "required": [
-                  "email"
-                ]
+                }
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Email disposable analysis"
+            "description": "Disposable email risk score and classification"
           }
         }
       }
